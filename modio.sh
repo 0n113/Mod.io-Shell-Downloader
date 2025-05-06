@@ -5,10 +5,19 @@ API_KEY=""
 GAME_ID="" 
 OUTPUT_DIR=""
 
+# Sicherstellen, dass OUTPUT_DIR gültig ist
+if [[ -z "$OUTPUT_DIR" ]]; then
+  echo "Fehler: OUTPUT_DIR ist nicht gesetzt." >&2
+  exit 1
+fi
 
-mkdir -p "$OUTPUT_DIR"
-touch "$LOG_FILE"
-touch "$HASH_DB"
+mkdir -p "$OUTPUT_DIR" || { echo "Fehler: Kann Zielordner nicht anlegen: $OUTPUT_DIR"; exit 1; }
+
+LOG_FILE="$OUTPUT_DIR/modio_download.log"
+HASH_DB="$OUTPUT_DIR/mod_hashes.txt"
+
+touch "$LOG_FILE" || { echo "Fehler: Kann Logdatei nicht schreiben: $LOG_FILE"; exit 1; }
+touch "$HASH_DB" || { echo "Fehler: Kann Hash-Datenbank nicht schreiben: $HASH_DB"; exit 1; }
 
 log() {
   echo "$(date +"%Y-%m-%d %H:%M:%S") - $1" | tee -a "$LOG_FILE"
