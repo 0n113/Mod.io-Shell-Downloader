@@ -1,4 +1,4 @@
-🛠 Mod.io Auto Downloader for Anno 1800
+🛠 Mod.io Auto Downloader
 
 This script automates the process of downloading, updating, and extracting all mods you've subscribed to on mod.io
 ✨ Features
